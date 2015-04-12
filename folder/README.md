@@ -319,19 +319,23 @@ Consider again Contribution:antlrObjects which clearly contains program componen
 
 In this context, if not earlier, the question may arise as to whether tags may also be associated automatically on the grounds of data mining techniques. That is, some [Language:101meta](#Language:101meta) does not need to be authored if it may be inferred. This is clearly possible for domain terms and concepts and even features. The [101project](http://101companies.org/wiki/@project) involves related efforts.
 
-### Processing-related metadata
+## Processing-related metadata
 
-## [Validators](https://github.com/101companies/101worker/tree/master/validators):
+### Validators:
 
-As another form of metadata, a [validator](https://github.com/101companies/101worker/tree/master/validators) may be associated with each file. The meaning of validation is here that matched files are to be validated to essentially verify assumptions implied by matching. For instance, we can be reasonably sure that files with suffix `.java` contain `Java` source code, but if we wanted to validate this assumption, then we may register a [validator](https://github.com/101companies/101worker/tree/master/validators). To avoid Code-Injection and make  the architecture of the [101worker](https://github.com/101companies/101worker) easier these executables can be found in [validators on GitHub](https://github.com/101companies/101worker/tree/master/validators). To let a rule execute a specific validator it has to assign the directory name in [../validators/"validator keyword"](https://github.com/101companies/101worker/tree/master/validators):
+As another form of metadata, a [validator](https://github.com/101companies/101worker/tree/master/validators) may be associated with each file. The meaning of validation is here that matched files are to be validated to essentially verify assumptions implied by matching. For instance, we can be reasonably sure that files with suffix `.java` contain `Java` source code, but if we wanted to validate this assumption, then we may register a [validator](https://github.com/101companies/101worker/tree/master/validators). 
+To avoid Code-Injection and make the architecture of the [101worker](https://github.com/101companies/101worker) cleaner these executables can be found in [validators](https://github.com/101companies/101worker/tree/master/validators). To let a rule execute a specific validator it has to assign the directory name in [../validators/"validator keyword"](https://github.com/101companies/101worker/tree/master/validators) directory.
+Right now the [101worker](https://github.com/101companies/101worker) supports six kinds of validators for the different types of data:
 
-* [**CSharpValidator**](https://github.com/101companies/101worker/tree/master/validators/CSharpValidator) files with suffix `.cs` contain `C#`.
-* [**JTidyValidator**](https://github.com/101companies/101worker/tree/master/validators/JTidyValidator) files with suffix `.html` contain `JTidy`.
-* [**JValidator**](https://github.com/101companies/101worker/tree/master/validators/JValidator) files with suffix `.java` contain `Java`.
-* [**W3CValidator**](https://github.com/101companies/101worker/tree/master/validators/W3CValidator) files with suffix `.html` contain `CSS`.
-* [**XMLValidator**](https://github.com/101companies/101worker/tree/master/validators/XMLValidator) files with suffix `.xml` contain `XML`.
-* [**XSDValidator**](https://github.com/101companies/101worker/tree/master/validators/XSDValidator) files with suffix `.xsd` contain `XSD`.
+* [CSharpValidator](https://github.com/101companies/101worker/tree/master/validators/CSharpValidator) files with suffix `.cs` contain `C#`.
+* [JTidyValidator](https://github.com/101companies/101worker/tree/master/validators/JTidyValidator) files with suffix `.html` contain `JTidy`.
+* [JValidator](https://github.com/101companies/101worker/tree/master/validators/JValidator) files with suffix `.java` contain `Java`.
+* [W3CValidator](https://github.com/101companies/101worker/tree/master/validators/W3CValidator) files with suffix `.html` contain `CSS`.
+* [XMLValidator](https://github.com/101companies/101worker/tree/master/validators/XMLValidator) files with suffix `.xml` contain `XML`.
+* [XSDValidator](https://github.com/101companies/101worker/tree/master/validators/XSDValidator) files with suffix `.xsd` contain `XSD`.
 
+
+The [validator](https://github.com/101companies/101worker/tree/master/validators) is an executable that is applied to the file in question. It can be coded in any language of choice as long as the name of the executable is `validator`. As an example, we use a validator for `Java`, i.e., [Technology:JValidator](https://github.com/101companies/101worker/tree/master/validators/JValidator), which is a `101technology`:
 
 ```
 { 
@@ -340,33 +344,33 @@ As another form of metadata, a [validator](https://github.com/101companies/101wo
 } 
 ```
 
-The [validator](https://github.com/101companies/101worker/tree/master/validators) is an executable that is applied to the file in question. It can be coded in any language of choice as long as the name of the executable is `validator`. In the example, we use a simple validator for `Java`, i.e., [Technology:JValidator](https://github.com/101companies/101worker/tree/master/validators/JValidator), which is a `101technology`. It essentially parses the source code; it does not attempt compilation; it does not enforce any static semantics rules. Zero exit code is to be interpreted as successful validation; non-zero exit code as failure. Validation must not be confused with the predicate form of constraint as validation is applied past successful rule matching whereas constraint checking is part of matching itself. The `101companies:Explorer` leverages validation in a manner that all failed validation is highlighted to receive the attention of the user, thereby suggesting eventual revision of the relevant rule for matching or making a change to the relevant file or its filename.
+It essentially parses the source code, it does not attempt compilation and it does not enforce any static semantics rules. Zero exit code is to be interpreted as successful validation and non-zero exit code as failure. Validation must not be confused with the predicate form of constraint as validation is applied past successful rule matching, whereas constraint checking is part of matching itself. The `101companies:Explorer` leverages validation in a manner, that all failed validation is highlighted to receive the attention of the user, thereby suggesting eventual revision of the relevant rule for matching or making a change to the relevant file or its filename.
 
-## [extractors](https://github.com/101companies/101worker/tree/master/extractor):
+## extractors:
 
 A fact [extractor](https://github.com/101companies/101worker/tree/master/extractor) may be associated with each file. The `language` metadata key is used to determine what fact [extractor](https://github.com/101companies/101worker/tree/master/extractor) should be executed. All available extractors can be found in the [extractor](https://github.com/101companies/101worker/tree/master/extractor) direction of the [101worker](https://github.com/101companies/101worker) main folder and will be called by the [extract101meta](https://github.com/101companies/101worker/tree/master/modules/extract101meta) module.  They can be coded in any language. 
 
-There is one [extractor](https://github.com/101companies/101worker/tree/master/extractor) per language right now:
+There is one [extractor](https://github.com/101companies/101worker/tree/master/extractor) for supporting ten different types of source code files:
 
-* [**CSharp**](https://github.com/101companies/101worker/tree/master/extractor/CSharp) extracts `C#` files.
-* [**HTML*](https://github.com/101companies/101worker/tree/master/extractor/HTML) extracts `HTML` files.
-* [**Haskell**](https://github.com/101companies/101worker/tree/master/extractor/Haskell) extracts `Haskell` files.
-* [**JSON**](https://github.com/101companies/101worker/tree/master/extractor/JSON) extracts `JSON` files.
-* [**Java**](https://github.com/101companies/101worker/tree/master/extractor/Java) extracts `Java` files.
-* [**JavaScript**](https://github.com/101companies/101worker/tree/master/extractor/JavaScript) extracts `JavaScript` files.
-* [**Python**](https://github.com/101companies/101worker/tree/master/extractor/Python) extracts `Python` files.
-* [**SQL**](https://github.com/101companies/101worker/tree/master/extractor/SQL) extracts `SQL` files.
-* [**XMI**](https://github.com/101companies/101worker/tree/master/extractor/XMI) extracts `XMI` files.
-* [**XSD**](https://github.com/101companies/101worker/tree/master/extractor/XSD) extracts `XSD` files.
+* [../CSharp/extractor](https://github.com/101companies/101worker/tree/master/extractor/CSharp) extracts `C#` files.
+* [../HTML/extractor](https://github.com/101companies/101worker/tree/master/extractor/HTML) extracts `HTML` files.
+* [../Haskell/extractor](https://github.com/101companies/101worker/tree/master/extractor/Haskell) extracts `Haskell` files.
+* [../JSON/extractor](https://github.com/101companies/101worker/tree/master/extractor/JSON) extracts `JSON` files.
+* [../Java/extractor](https://github.com/101companies/101worker/tree/master/extractor/Java) extracts `Java` files.
+* [../JavaScript/extractor](https://github.com/101companies/101worker/tree/master/extractor/JavaScript) extracts `JavaScript` files.
+* [../Python/extractor](https://github.com/101companies/101worker/tree/master/extractor/Python) extracts `Python` files.
+* [../SQL/extractor](https://github.com/101companies/101worker/tree/master/extractor/SQL) extracts `SQL` files.
+* [../XMI/extractor](https://github.com/101companies/101worker/tree/master/extractor/XMI) extracts `XMI` files.
+* [../XSD/extractor](https://github.com/101companies/101worker/tree/master/extractor/XSD) extracts `XSD` files.
 
 In this manner, files may be processed by fact extractors and thereby enable further functionality. For instance, we may assume that the fact [extractor](https://github.com/101companies/101worker/tree/master/extractor) determines all imports made by some source code so that rules for constraining imports may rely on such facts as opposed to performing text matching of fact extraction themselves.
 
 ### Inside Module Description:
 
-The different modules perhaps depend on certain metadata. For example uses the [extract101meta](https://github.com/101companies/101worker/tree/master/modules/extract101meta) module the retrieved language’s to determine which [extractor](https://github.com/101companies/101worker/tree/master/extractor) it should execute. This is the case since every language has a specific [extractor](## [extractors](https://github.com/101companies/101worker/tree/master/extractor)). 
-That is the reason why every module that is involved with the processing of metadata has to insert specific values into the module description. First of all it has to tell the [runner](https://github.com/101companies/101worker/tree/master/tools/runner) which metadata is depends on and which one it obtains (e.g matches receives: language). The reason we know that is the simple fact that there are specific patterns due to the architecture of rules. So it is pretty safe to say that `suffix => language`.
+The different modules depend on certain metadata. For example uses the [extract101meta](https://github.com/101companies/101worker/tree/master/modules/extract101meta) module the retrieved language’s to determine which [extractor](https://github.com/101companies/101worker/tree/master/extractor) it should execute. This is the case since every language has a specific [extractor](##extractor). 
+That is the reason why every module that is involved with the processing of metadata has to insert specific values into the module description. First of all it has to tell the [runner](https://github.com/101companies/101worker/tree/master/tools/runner) which metadata the module depends on and which one is obtained (e.g matches receives: language). The reason we know that is the simple fact that there are specific patterns due to the architecture of rules. So it is safe to say that the suffix declares the language.
 
-Over here we have an example of a valid module description with attention to the metadata parts.
+The [predicates101meta](https://github.com/101companies/101worker/blob/master/modules/predicates101meta/) module, is an example of a how the [Language:101meta](#Language:101meta) is embedded in the modul description:
 
 ```
 "metadata" : { 
@@ -374,10 +378,10 @@ Over here we have an example of a valid module description with attention to the
 	"obtained" :		["comment", "feature", "dependsOn"] 
 			}
 ``` 
-source: [predicates101meta module](https://github.com/101companies/101worker/blob/master/modules/predicates101meta/module.json)
+source: https://github.com/101companies/101worker/blob/master/modules/predicates101meta/module.json
 
 
-### Table with dependencies
+### Table with different kinds of dependencies 
 
 |			|Suffix		|filename	|dirname|basename	|predicate args	|fragment (+filename)	|content(+basename or suffix)	|
 |-----------|-----------|-----------|-------|-----------|---------------|-----------------------|-------------------------------|
@@ -402,7 +406,7 @@ source: [predicates101meta module](https://github.com/101companies/101worker/blo
 
 ### Inside Predicates
 
-Every predicate has a predicate description that informs the predicate101 module about different handy stuff. For example it tells about the module and metadata dependencies. Although it can depend on metadata there is right now no way to tell what metadata the predicates obtains. We decided against giving that option because right now we did not saw a use case where that option would be of any use. It is, however, possible to have a dependency to a specific metadata key:
+Every predicate has a predicate description that informs the [predicates101meta](https://github.com/101companies/101worker/tree/master/modules/predicates101meta) module about the module name, the metadata as well as modul dependencies and the minmum and maximum arguments. Although it can depend on metadata there is right now no way to tell what metadata the predicates obtains. We decided against giving that option, because right now there is no use case where that option would be of any use.
 
 ```
 {
