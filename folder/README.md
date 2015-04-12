@@ -349,24 +349,24 @@ Over here we have an example of a valid module description with attention to the
 
 |			|Suffix		|filename	|dirname|basename	|predicate args	|fragment (+filename)	|content(+basename or suffix)	|
 |-----------|-----------|-----------|-------|-----------|---------------|-----------------------|-------------------------------|
-|language	|			|			|		|			|				|						|								|
-|geshi		|			|			|		|			|				|						|								|
-|validator	|			|			|		|			|				|						|								|
-|nature		|			|			|		|			|				|						|								|
-|comment	|			|			|		|			|				|						|								|
-|manual		|			|			|		|			|				|						|								|
-|feature	|			|			|		|			|				|						|								|
-|relevance	|			|			|		|			|				|						|								|
-|phrase		|			|			|		|			|				|						|								|
-|feature?	|			|			|		|			|				|						|								|
+|language	|b			|			|		|ok			|				|						|								|
+|geshi		|b			|			|		|b			|				|						|								|
+|validator	|b			|			|		|			|				|						|								|
+|nature		|b			|			|		|			|				|						|								|
+|comment	|db			|b			|b		|dok		|db				|						|b								|
+|manual		|			|b			|		|			|				|						|								|
+|feature	|			|b			|		|			|				|						|								|
+|relevance	|			|db			|b		|g			|g				|						|b								|
+|phrase		|			|o			|		|			|				|b						|								|
+|feature?	|			|g			|		|			|db				|						|								|
 |term		|			|			|		|			|				|						|								|
-|dominator	|			|			|		|			|				|						|								|
-|extractor	|			|			|		|			|				|						|								|
-|concept	|			|			|		|			|				|						|								|
-|dominator?	|			|			|		|			|				|						|								|
-|assignment	|			|			|		|			|				|						|								|
-|dependsOn	|			|			|		|			|				|						|								|
-|outputOf	|			|			|		|			|				|						|								|
+|dominator	|			|r			|		|dok		|				|						|								|
+|extractor	|b			|			|		|			|				|						|								|
+|concept	|db			|			|		|			|				|						|b								|
+|dominator?	|db			|db			|		|			|				|						|								|
+|assignment	|			|db			|db		|			|				|						|								|
+|dependsOn	|			|			|		|b			|b				|						|								|
+|outputOf	|			|			|		|			|				|						|b								|
 
 ### Inside Predicates
 
