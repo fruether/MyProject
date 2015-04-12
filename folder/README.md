@@ -346,7 +346,27 @@ Over here we have an example of a valid module description with attention to the
 
 
 ### Table with dependencies
-TODO
+
+|			|Suffix		|filename	|dirname|basename	|predicate args	|fragment (+filename)	|content(+basename or suffix)	|
+|-----------|-----------|-----------|-------|-----------|---------------|-----------------------|-------------------------------|
+|language	|			|			|		|			|				|						|								|
+|geshi		|			|			|		|			|				|						|								|
+|validator	|			|			|		|			|				|						|								|
+|nature		|			|			|		|			|				|						|								|
+|comment	|			|			|		|			|				|						|								|
+|manual		|			|			|		|			|				|						|								|
+|feature	|			|			|		|			|				|						|								|
+|relevance	|			|			|		|			|				|						|								|
+|phrase		|			|			|		|			|				|						|								|
+|feature?	|			|			|		|			|				|						|								|
+|term		|			|			|		|			|				|						|								|
+|dominator	|			|			|		|			|				|						|								|
+|extractor	|			|			|		|			|				|						|								|
+|concept	|			|			|		|			|				|						|								|
+|dominator?	|			|			|		|			|				|						|								|
+|assignment	|			|			|		|			|				|						|								|
+|dependsOn	|			|			|		|			|				|						|								|
+|outputOf	|			|			|		|			|				|						|								|
 
 ### Inside Predicates
 
