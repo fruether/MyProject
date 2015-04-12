@@ -79,7 +79,7 @@ A more detailed description of the modules can be found in the [101worker](https
 
 ## Metadata scenarios
 
-We introduce [Language:101meta](#Language:101meta) here by a series of examples that illustrate essential metadata scenarios in the [101project](http://101companies.org/wiki/@project).
+We introduce [Language:101meta](# Language:101meta) here by a series of examples that illustrate essential metadata scenarios in the [101project](http://101companies.org/wiki/@project).
 
 ### Inside Rules
 
@@ -94,7 +94,7 @@ Constraint example:
 	"language": "Java", 
 	"metadata": {
 		"comment": "API usage of JAXB", 
-		"dependsOn": „JAXB"
+		"dependsOn": "JAXB"
 	}
 }
 ```
