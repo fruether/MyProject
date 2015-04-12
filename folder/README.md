@@ -86,6 +86,7 @@ We introduce [Language:101meta](#Language:101meta) here by a series of examples 
 The metadata can be found, as discussed above, either as a constraint or as a result. First of all we will cover an example of a metadata key as a constraint.
 
 Constraint example:
+
 ```
 {
 	"predicate": "javaImport", 
@@ -203,9 +204,9 @@ This time, the metadata declares that the given file is input for `the parser ge
 }
 ```
 
-```*
-TODO: one may attempt a simplification of the patterns. Hint: the beginning of the file does not need to be matched explicitly.) This time, the files at hand are tagged as resulting from the application of `ANTLR` as an output. We assume that a 101companies-specific interpreter, e.g., `101companies:Explorer` for the exploration of contributions, de-prioritizes `output` files as opposed to `input` files.
-*```
+
+*TODO: one may attempt a simplification of the patterns. Hint: the beginning of the file does not need to be matched explicitly.) This time, the files at hand are tagged as resulting from the application of `ANTLR` as an output. We assume that a 101companies-specific interpreter, e.g., `101companies:Explorer` for the exploration of contributions, de-prioritizes `output` files as opposed to `input` files.*
+
 
 There is a major problem with the rule for generated files: the rule relies on insufficiently distinctive filename patterns. The use of `Parser` or `Lexer` in naming source files for parsers and lexers does not reasonably imply usage of `ANTLR`. Thus, we need to further constrain the rule in a way that the content of the files can be checked to support the assumption about `ANTLR` usage. We will return to this problem later in the context of a more complete discussion of metadata mechanics TODO.
 
