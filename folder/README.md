@@ -1,5 +1,5 @@
 # Language:101meta
-## A language for associating metadata with files in a file system.
+A language for associating metadata with files in a file system.
 
 
 ## Summary
@@ -29,7 +29,7 @@ Besides that constraints there are also the follow specific once. This kind of c
 * **term** for association with a term of the 101companies:Vocabulary.
 * **phrase** for association with a phrase built from the 101companies:Vocabulary.
 * **concept** for association with a concept on the 101wiki.
-* **nature** for association of file nature, e.g., "binary" for use by the 101companies:Explorer.
+* **nature** for association of file nature, e.g., `binary` for use by the 101companies:Explorer.
 * **geshi** for association with a language code as used when rendering with Technology:GeSHi.
 * **locator** for association with an executable to be used as fragment locator.
 * **validator** for association with an executable to be used as validator.
@@ -37,13 +37,13 @@ Besides that constraints there are also the follow specific once. This kind of c
 * **relevance** metadata for indicating the importance of a file.
 
 
-## How the 101Worker and language come together
+## How the 101worker and language come together
 
 In that short chapter we want to discuss how the 101worker and the 101language fit together in the complete system. The modules with the „101“ ending are somewhat related to the 101language. It is important to understand how they act together to get a overall understanding.
 
-First of all all the rules, which are stored in the 101repo, are aggregated and summarized in one large file called „rules.json“ If you want to check that file out have a look to: http://data.101companies.org/dumps/rules.json . This job is performed by the rule101 module.
-After that module ran successfully the first basic rules are executed by the matches101 module. This module aims to execute all the rules, that neither have a predicate nor a fragment as part of the constraint. The result is stored in files with the ending „.matches.json“ . They can be found in a specific folder in the 101web/resources location (http://data.101companies.org/resources/).
-Once that is done we start to execute different modules to analyze the files. The way of the execution, however, depends on the metadata that are known about the file. The metrics101 module uses the GeSHi coded retrieved before to extract token sequences (https://github.com/101companies/101worker/wiki/Module%20metrics101meta)
+First of all all the rules, which are stored in the 101repo, are aggregated and summarized in one large file called ['rules.json'](http://data.101companies.org/dumps/rules.json). This job is performed by the rule101 module.
+After that module ran successfully the first basic rules are executed by the matches101 module. This module aims to execute all the rules, that neither have a predicate nor a fragment as part of the constraint. The result is stored in files with the ending „.matches.json“ . They can be found in a specific folder in the [101web/resources location](http://data.101companies.org/resources/).
+Once that is done we start to execute different modules to analyze the files. The way of the execution, however, depends on the metadata that are known about the file. [The metrics101 module uses the GeSHi coded retrieved before to extract token sequences](https://github.com/101companies/101worker/wiki/Module%20metrics101meta)
 
 Another part in processing the language is that we want to validate the found metadata especially the language. Therefore the rules identify by the suffix of a file not just a language but also a specific validator. That validator is used to make sure that the assumed language is right. The specific validators can be found in the /validator location, are references over the validator metadata key and are finally executed in the validate101 module.
 
@@ -74,14 +74,14 @@ After the first analyses steps on the metadata is performed the worker will now 
 }
 ```
 
-A more detailed description of the modules can be found in the 101worker wiki: https://github.com/101companies/101docs/tree/master/worker/modules
+A more detailed description of the modules can be found in the [101worker](https://github.com/101companies/101docs/tree/master/worker/modules).
 
 
 ## Metadata scenarios
 
 We introduce Language:101meta here by a series of examples that illustrate essential metadata scenarios in the 101project.
 
-Inside Rules
+### Inside Rules
 
 The metadata can be found, as discussed above, either as a constraint or as a result. First of all we will cover an example of a metadata key as a constraint.
 
@@ -104,7 +104,7 @@ Right now you cannot refer to every metadata-key. So if you plan to use it at an
 
 ### Language-related metadata 
 
-The first example concerns matching of files with suffix ".java" to be associated with the language "Java".
+The first example concerns matching of files with suffix `.java` to be associated with the language `Java`.
 
 ```
 { 
@@ -113,7 +113,7 @@ The first example concerns matching of files with suffix ".java" to be associate
 }
 ```
 
-The suffix constrains the suffix (the extension) of files to be matched. Metadata takes the form of a key-value pair with "language" as key and "Java" as value. In a conceptual sense, such metadata submits that the file in question is an element of the language specified; see the "elementOf" relationship of Language:MegaL. We assume that a 101companies-specific interpreter, such as the 101companies:Explorer, links the key-value pair to the resource Language:Java as it is manifest on the 101wiki.
+The suffix constrains the suffix (the extension) of files to be matched. Metadata takes the form of a key-value pair with `language` as key and `Java` as value. In a conceptual sense, such metadata submits that the file in question is an element of the language specified; see the `elementOf` relationship of Language:MegaL. We assume that a 101companies-specific interpreter, such as the 101companies:Explorer, links the key-value pair to the resource Language:Java as it is manifest on the 101wiki.
 
 The example specifies a single rule. In general, an Language:101meta specification is a list of rules. Here is a specification with two rules to match both Language:JavaScript and Language:Java files; array notation is used to this end:
 
@@ -132,7 +132,7 @@ The example specifies a single rule. In general, an Language:101meta specificati
 
 ### Technology-related metadata
 
-We will be concerned now with technologies as opposed to languages. We define rules related to the parser generator Technology:ANTLR for illustration. In the case of using ANTLR with Java, the technology is packaged as a ".jar" archive. Hence, let us associate, for example, the (version-specific) file "antlr-3.2.jar" with the technology "ANTLR".
+We will be concerned now with technologies as opposed to languages. We define rules related to the parser generator Technology:ANTLR for illustration. In the case of using ANTLR with Java, the technology is packaged as a `.jar` archive. Hence, let us associate, for example, the (version-specific) file `antlr-3.2.jar` with the technology `ANTLR`.
 
 ```
 { 
@@ -141,7 +141,7 @@ We will be concerned now with technologies as opposed to languages. We define ru
 }
 ```
 
-The basename constraint implies that we do not care about the directory of the matched file here. Metadata takes the form of a key-value pair with "partOf" as key and "ANTLR" as value. We use "partOf" here in the sense that a concrete artifact, such as a ".jar" archive, can be considered part of a technology, which is a conceptual (abstract) entity; see the "partOf" relationship of Language:MegaL. We assume that a 101companies-specific interpreter, such as the 101companies:Explorer, links the value "ANTLR" to Technology:ANTLR as it is manifest on the 101wiki.
+The basename constraint implies that we do not care about the directory of the matched file here. Metadata takes the form of a key-value pair with `partOf` as key and `ANTLR` as value. We use `partOf` here in the sense that a concrete artifact, such as a `.jar` archive, can be considered part of a technology, which is a conceptual (abstract) entity; see the `partOf` relationship of Language:MegaL. We assume that a 101companies-specific interpreter, such as the 101companies:Explorer, links the value `ANTLR` to Technology:ANTLR as it is manifest on the 101wiki.
 
 Let us cover two versions of ANTLR:
 
@@ -167,7 +167,7 @@ The example applies the same metadata to two different files. For conciseness' s
 }
 ```
 
-We may also use regular expression matching on file names. In this manner, we can even match all possible versions of ANTLR with a single rule. To this end, we allow for any substring between "antlr-" and ".jar". Thus:
+We may also use regular expression matching on file names. In this manner, we can even match all possible versions of ANTLR with a single rule. To this end, we allow for any substring between `antlr-` and `.jar`. Thus:
 
 ```
 { 
@@ -176,9 +176,9 @@ We may also use regular expression matching on file names. In this manner, we ca
 }
 ```
 
-Here, "^" marks the beginning of the string, "$" marks the end of the string, and "\" escapes a metasymbol (because "." is metasymbol for any character). The regular expression is enclosed by "#...#" thereby expressing unambiguously that regular expression matching as opposed to literal name matching is to be applied.
+Here, `^` marks the beginning of the string, `$` marks the end of the string, and `\` escapes a metasymbol (because `.` is metasymbol for any character). The regular expression is enclosed by `#...#` thereby expressing unambiguously that regular expression matching as opposed to literal name matching is to be applied.
 
-The ".jar" file for ANTLR is by no means the only way how files could be associated with ANTLR. In general, technologies deal with various kinds of files: input, output, configuration files, or others. Consider ".g" files, which are an indicator of ANTLR usage because ANTLR's grammar files use this extension. Thus:
+The `.jar` file for ANTLR is by no means the only way how files could be associated with ANTLR. In general, technologies deal with various kinds of files: input, output, configuration files, or others. Consider `.g` files, which are an indicator of ANTLR usage because ANTLR's grammar files use this extension. Thus:
 
 ```
 { 
@@ -196,14 +196,14 @@ This time, the metadata declares that the given file is input for the parser gen
 }
 ```
 
-(As an exercise, one may attempt a simplification of the patterns. Hint: the beginning of the file does not need to be matched explicitly.) This time, the files at hand are tagged as resulting from the application of ANTLR as an output. We assume that a 101companies-specific interpreter, e.g., 101companies:Explorer for the exploration of contributions, de-prioritizes "output" files as opposed to "input" files.
+(As an exercise, one may attempt a simplification of the patterns. Hint: the beginning of the file does not need to be matched explicitly.) This time, the files at hand are tagged as resulting from the application of ANTLR as an output. We assume that a 101companies-specific interpreter, e.g., 101companies:Explorer for the exploration of contributions, de-prioritizes `output` files as opposed to `input` files.
 
-There is a major problem with the rule for generated files: the rule relies on insufficiently distinctive filename patterns. The use of "Parser" or "Lexer" in naming source files for parsers and lexers does not reasonably imply usage of ANTLR. Thus, we need to further constrain the rule in a way that the content of the files can be checked to support the assumption about ANTLR usage. We will return to this problem later in the context of a more complete discussion of metadata mechanics.
+There is a major problem with the rule for generated files: the rule relies on insufficiently distinctive filename patterns. The use of `Parser` or `Lexer` in naming source files for parsers and lexers does not reasonably imply usage of ANTLR. Thus, we need to further constrain the rule in a way that the content of the files can be checked to support the assumption about ANTLR usage. We will return to this problem later in the context of a more complete discussion of metadata mechanics.
 
 
 ### Feature-related metadata:
 
-We may want to "tag" files with features of the 101system, as they are implemented in the file. The following example deals with Contribution:javaStatic, which is a simple and modular Java-based implementation of the 101system:
+We may want to `tag` files with features of the 101system, as they are implemented in the file. The following example deals with Contribution:javaStatic, which is a simple and modular Java-based implementation of the 101system:
 ```
 [ 
   { 
@@ -231,7 +231,7 @@ We may want to "tag" files with features of the 101system, as they are implement
 
 ### Domain-related metadata
 
-We may also want to "tag" files with terms of the 101companies:Vocabulary which collects nouns and verbs of the 101companies "domain". This may be, in fact, an alternative to tagging files with features. For instance, we may want to express that certain modules define the 101companies-specific operations 101term:Cut and 101term:Total. Again, we apply tagging to Contribution:javaStatic.
+We may also want to `tag` files with terms of the 101companies:Vocabulary which collects nouns and verbs of the 101companies `domain`. This may be, in fact, an alternative to tagging files with features. For instance, we may want to express that certain modules define the 101companies-specific operations 101term:Cut and 101term:Total. Again, we apply tagging to Contribution:javaStatic.
 
 ```
 [ 
@@ -248,7 +248,7 @@ We may also want to "tag" files with terms of the 101companies:Vocabulary which 
 
 One may think of these 101companies-specific tags as being more concise than the feature-oriented tags that we used earlier. That is, term 101term:Total is a proxy for feature Feature:Total and term 101term:Cut is a proxy for feature Feature:Cut. As a guideline, such concise terms are to be preferred over features for tagging, whenever applicable.
 
-We continue the previous example, by tagging also structure-related modules. That is, we associate the tags for the terms 101term:Company, 101term:Department, and 101term:Employee with the appropriate ".java" files. Incidentally, such tagging is more precise than the earlier tagging with the feature Feature:Hierarchical company, which did not distinguish the different domain concepts for companies, departments, and employees.
+We continue the previous example, by tagging also structure-related modules. That is, we associate the tags for the terms 101term:Company, 101term:Department, and 101term:Employee with the appropriate `.java` files. Incidentally, such tagging is more precise than the earlier tagging with the feature Feature:Hierarchical company, which did not distinguish the different domain concepts for companies, departments, and employees.
 
 ```
 [ 
@@ -290,7 +290,7 @@ Such phrases are even more useful when attached to specific file fragments as op
 
 ### Concept-related metadata
 
-Further, we may also want to "tag" files with any concepts in the broader areas of software technologies and software languages. Ideally, such concepts should be readily modeled on the 101wiki. For instance, we may want to express that certain modules define a parser, a GUI, or use a MVC architecture.
+Further, we may also want to `tag` files with any concepts in the broader areas of software technologies and software languages. Ideally, such concepts should be readily modeled on the 101wiki. For instance, we may want to express that certain modules define a parser, a GUI, or use a MVC architecture.
 
 Consider again Contribution:antlrObjects which clearly contains program components for parsing and lexing. Accordingly, we tag the corresponding files:
 
@@ -312,7 +312,7 @@ In this context, if not earlier, the question may arise as to whether tags may a
 ### Processing-related metadata
 
 ## Validators:
-As another form of metadata, a validator may be associated with each file. The meaning of validation is here that matched files are to be validated to essentially verify assumptions implied by matching. For instance, we can be reasonably sure that files with suffix ".java" contain Java source code, but if we wanted to validate this assumption, then we may register a validator. To avoid Code-Injection and make  the architecture of the worker easier these executables can be found in the validators/ folder in the 101worker tree. To let a rule execute a specific validator it has to assign the folder name (in the validator/ path) to the validator keyword:
+As another form of metadata, a validator may be associated with each file. The meaning of validation is here that matched files are to be validated to essentially verify assumptions implied by matching. For instance, we can be reasonably sure that files with suffix `.java` contain Java source code, but if we wanted to validate this assumption, then we may register a validator. To avoid Code-Injection and make  the architecture of the worker easier these executables can be found in the validators/ folder in the 101worker tree. To let a rule execute a specific validator it has to assign the folder name (in the validator/ path) to the validator keyword:
 
 ```
 { 
