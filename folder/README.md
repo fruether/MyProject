@@ -1,5 +1,5 @@
 # Language:101meta
-# A language for associating metadata with files in a file system.
+## A language for associating metadata with files in a file system.
 
 
 ## Summary
@@ -18,7 +18,7 @@ Besides that constraints there are also the follow specific once. This kind of c
 * **fragment:** a fragment of a matched file to which to apply to metadata, subject to a suitable fragment description.
 * **predicate:** the name of an executable to be applied to files for deciding on matching.
 
-## In the 101project, the following forms of metadata are used:
+### In the 101project, the following forms of metadata are used:
 
 * **language** for declaring an artifact as being an element of a language on the 101wiki.
 * **partOf** for declaring an artifact as being a part of a technology on the 101wiki.
@@ -37,7 +37,7 @@ Besides that constraints there are also the follow specific once. This kind of c
 * **relevance** metadata for indicating the importance of a file.
 
 
-# How the 101Worker and Language come together
+## How the 101Worker and language come together
 
 In that short chapter we want to discuss how the 101worker and the 101language fit together in the complete system. The modules with the „101“ ending are somewhat related to the 101language. It is important to understand how they act together to get a overall understanding.
 
@@ -46,12 +46,14 @@ After that module ran successfully the first basic rules are executed by the mat
 Once that is done we start to execute different modules to analyze the files. The way of the execution, however, depends on the metadata that are known about the file. The metrics101 module uses the GeSHi coded retrieved before to extract token sequences (https://github.com/101companies/101worker/wiki/Module%20metrics101meta)
 
 Another part in processing the language is that we want to validate the found metadata especially the language. Therefore the rules identify by the suffix of a file not just a language but also a specific validator. That validator is used to make sure that the assumed language is right. The specific validators can be found in the /validator location, are references over the validator metadata key and are finally executed in the validate101 module.
+
 ```
 { 
   "suffix" : ".java", 
   "metadata" : { "validator" : "JValidator" }
 }
-``
+```
+
 The next thing that is going to happen is a fact extraction on the files. This will take place in the extract101 module. There are several kind of extractors that are plugged into the worker (/extractor) and are referenced over the language keyword inside the metadata values. The extract101 module will now simply observe the language of an artefact, by using the result of matches101, and execute the fitting extractor module.
 
 
@@ -59,6 +61,7 @@ Afterwards **fragmentMetrics101meta** module will do further processing of on th
 
 
 After the first analyses steps on the metadata is performed the worker will now continue to run the remaining rules. First the predicate rules will be executed. Rules of that type reference to a predicate that will be executed. Some predicates use the result of the previous fact extraction hence that module has a dependency to extract101. Further this rules aren’t run on every file but just the once that have the requested language. An example of the discussed rule type  is: 
+
 ```
 {
 	"predicate": "javaImport", 
@@ -69,7 +72,8 @@ After the first analyses steps on the metadata is performed the worker will now 
 		"dependsOn": „JAXB"
 	}
 }
-``
+```
+
 A more detailed description of the modules can be found in the 101worker wiki: https://github.com/101companies/101docs/tree/master/worker/modules
 
 
@@ -98,15 +102,17 @@ In that example there is a constraint of a the „language“ metadata-key. It i
 Right now you cannot refer to every metadata-key. So if you plan to use it at another form than above make sure that in the meta101 library already supports it. If not perhaps add it yourself.  
 
 
-## Language-related metadata 
+### Language-related metadata 
 
 The first example concerns matching of files with suffix ".java" to be associated with the language "Java".
+
 ```
 { 
   "suffix" : ".java", 
   "metadata" : { "language" : "Java" } 
 }
 ```
+
 The suffix constrains the suffix (the extension) of files to be matched. Metadata takes the form of a key-value pair with "language" as key and "Java" as value. In a conceptual sense, such metadata submits that the file in question is an element of the language specified; see the "elementOf" relationship of Language:MegaL. We assume that a 101companies-specific interpreter, such as the 101companies:Explorer, links the key-value pair to the resource Language:Java as it is manifest on the 101wiki.
 
 The example specifies a single rule. In general, an Language:101meta specification is a list of rules. Here is a specification with two rules to match both Language:JavaScript and Language:Java files; array notation is used to this end:
@@ -123,7 +129,8 @@ The example specifies a single rule. In general, an Language:101meta specificati
   },
 ]
 ```
-## Technology-related metadata
+
+### Technology-related metadata
 
 We will be concerned now with technologies as opposed to languages. We define rules related to the parser generator Technology:ANTLR for illustration. In the case of using ANTLR with Java, the technology is packaged as a ".jar" archive. Hence, let us associate, for example, the (version-specific) file "antlr-3.2.jar" with the technology "ANTLR".
 
@@ -194,7 +201,7 @@ This time, the metadata declares that the given file is input for the parser gen
 There is a major problem with the rule for generated files: the rule relies on insufficiently distinctive filename patterns. The use of "Parser" or "Lexer" in naming source files for parsers and lexers does not reasonably imply usage of ANTLR. Thus, we need to further constrain the rule in a way that the content of the files can be checked to support the assumption about ANTLR usage. We will return to this problem later in the context of a more complete discussion of metadata mechanics.
 
 
-## Feature-related metadata:
+### Feature-related metadata:
 
 We may want to "tag" files with features of the 101system, as they are implemented in the file. The following example deals with Contribution:javaStatic, which is a simple and modular Java-based implementation of the 101system:
 ```
@@ -222,7 +229,7 @@ We may want to "tag" files with features of the 101system, as they are implement
 ]
 ```
 
-# Domain-related metadata
+### Domain-related metadata
 
 We may also want to "tag" files with terms of the 101companies:Vocabulary which collects nouns and verbs of the 101companies "domain". This may be, in fact, an alternative to tagging files with features. For instance, we may want to express that certain modules define the 101companies-specific operations 101term:Cut and 101term:Total. Again, we apply tagging to Contribution:javaStatic.
 
@@ -281,7 +288,7 @@ Terms can also be composed to provide more accurate descriptions. For instance, 
 
 Such phrases are even more useful when attached to specific file fragments as opposed to entire files. We will return to this opportunity later in the context of a more complete discussion of metadata mechanics.
 
-## Concept-related metadata
+### Concept-related metadata
 
 Further, we may also want to "tag" files with any concepts in the broader areas of software technologies and software languages. Ideally, such concepts should be readily modeled on the 101wiki. For instance, we may want to express that certain modules define a parser, a GUI, or use a MVC architecture.
 
@@ -302,9 +309,9 @@ Consider again Contribution:antlrObjects which clearly contains program componen
 
 In this context, if not earlier, the question may arise as to whether tags may also be associated automatically on the grounds of data mining techniques. That is, some Language:101meta does not need to be authored if it may be inferred. This is clearly possible for domain terms and concepts and even features. The 101project involves related efforts.
 
-## Processing-related metadata
+### Processing-related metadata
 
-### Validators:
+## Validators:
 As another form of metadata, a validator may be associated with each file. The meaning of validation is here that matched files are to be validated to essentially verify assumptions implied by matching. For instance, we can be reasonably sure that files with suffix ".java" contain Java source code, but if we wanted to validate this assumption, then we may register a validator. To avoid Code-Injection and make  the architecture of the worker easier these executables can be found in the validators/ folder in the 101worker tree. To let a rule execute a specific validator it has to assign the folder name (in the validator/ path) to the validator keyword:
 
 ```
@@ -316,37 +323,42 @@ As another form of metadata, a validator may be associated with each file. The m
 
 The validator is an executable that is applied to the file in question. It can be coded in any language of choice as long as the name of the executable is „validator“. In the example, we use a simple validator for Java, i.e., Technology:JValidator, which is a 101technology. It essentially parses the source code; it does not attempt compilation; it does not enforce any static semantics rules. Zero exit code is to be interpreted as successful validation; non-zero exit code as failure. Validation must not be confused with the predicate form of constraint as validation is applied past successful rule matching whereas constraint checking is part of matching itself. The 101companies:Explorer leverages validation in a manner that all failed validation is highlighted to receive the user's attention, thereby suggesting eventual revision of the relevant rule for matching or making a change to the relevant file or its filename.
 
-### Extractors:
+## Extractors:
 
 A fact extractor may be associated with each file. The „language“ metadata key is used to determine what fact extractor should be executed. All available extractors can be found in the extractor/ direction of the 101worker main folder and will be called by the extract101 module.  They can be coded in any language. There is one extractor per language right now.
 In this manner, files may be processed by fact extractors and thereby enable further functionality. For instance, we may assume that the fact extractor determines all imports made by some source code so that rules for constraining imports may rely on such facts as opposed to performing text matching of fact extraction themselves
 
 
-## Inside Module Description:
+### Inside Module Description:
 
 The different modules perhaps depend on certain metadata. For example uses the extract101 module the retrieved language’s to determine which extractor it should execute. This is the case since every language has a specific extractor. 
 That is the reason why every module that is involved with the processing of metadata has to insert specific values into the module description. First of all it has to tell the runner which metadata is depends on and which one it obtains (e.g matches receives: language). The reason we know that is the simple fact that there are specific patterns due to the architecture of rules. So it is pretty safe to say that suffix => language.
 
 Over here we have an example of a valid module description with attention to the metadata parts.
 
-[```
+```
 "metadata" : { 
 	"dependencies" : 	["language"], 
 	"obtained" :		["comment", "feature", "dependsOn"] 
 			}
-```](https://github.com/101companies/101worker/blob/master/modules/predicates101meta/module.json)
+``` 
+[predicates101meta module](https://github.com/101companies/101worker/blob/master/modules/predicates101meta/module.json)
 
 
-## Table with dependencies
+### Table with dependencies
+TODO
 
-
-## Inside Predicates
+### Inside Predicates
 
 Every predicate has a predicate description that informs the predicate101 module about different handy stuff. For example it tells about the module and metadata dependencies. Although it can depend on metadata there is right now no way to tell what metadata the predicates obtains. We decided against giving that option because right now we didn’t saw a use case where that option would be of any use. It is, however, possible to have a dependency to a specific metadata key:
-[```
+TODO: In text // Min and max number of arguments
+
+```
 {
-	"name" : "NamePredicate", 	"args" : [3,3], //Min and max number of arguments 
+	"name" : "NamePredicate", 	
+	"args" : [3,3], 
 	"dependencies" : ["extract101meta"], 
 	"metadata" : [] 	
  }
-```](https://github.com/101companies/101worker/blob/master/predicates/readme.md)
+```
+[predicates description](https://github.com/101companies/101worker/blob/master/predicates/readme.md)
