@@ -156,7 +156,7 @@ The example specifies a single rule. In general, an [Language:101meta](#Language
 
 ### Technology-related metadata
 
-We will be concerned now with technologies as opposed to languages. We define rules related to the parser generator `Technology:ANTLR` for illustration. In the case of using `ANTLR with Java, the technology is packaged as a `.jar` archive. Hence, let us associate, for example, the (version-specific) file `antlr-3.2.jar` with the technology `ANTLR`.
+We will be concerned now with technologies as opposed to languages. We define rules related to the parser generator [Technology:ANTLR](http://www.antlr.org/) for illustration. In the case of using `ANTLR` with Java, the technology is packaged as a `.jar` archive. Hence, let us associate, for example, the (version-specific) file `antlr-3.2.jar` with the technology `ANTLR`.
 
 ```
 { 
@@ -209,7 +209,7 @@ The `.jar` file for ANTLR is by no means the only way how files can be associate
 * configuration files
 * ... 
 
-For example `.g` files, which are an indicator of `ANTLR` usage because `ANTLR's grammar` files use this extension:
+For example `.g` files, which are an indicator of `ANTLR` usage because `ANTLR grammar` files use this extension:
 
 ```
 { 
@@ -218,7 +218,7 @@ For example `.g` files, which are an indicator of `ANTLR` usage because `ANTLR's
 }
 ```
 
-This time, the metadata declares that the given file is input for `the parser generator ANTLR`. We assume that a 101companies-specific interpreter, e.g., `101companies:Explorer` for the exploration of contributions, prioritizes input files over output files such as generated source code that is not meant for human consumption. The use of `ANTLR` may also be inferred on the grounds of generated files. When `ANTLR` is used in a common manner, then generated code parser and lexer are to be found in files with specific names as follows:
+This time, the metadata declares that the given file is input for the parser generator `ANTLR`. We assume that a 101companies-specific interpreter, e.g., `101companies:Explorer` for the exploration of contributions, prioritizes input files over output files such as generated source code that is not meant for human consumption. The use of `ANTLR` may also be inferred on the grounds of generated files. When `ANTLR` is used in a common manner, then generated code parser and lexer are to be found in files with specific names as follows:
 
 ```
 { 
