@@ -3,16 +3,39 @@ A language for associating metadata with files in a file system.
 
 
 ## Summary
-[Language:101meta](#language:101meta) is a rule-based language for connecting metadata with files and fragments thereof. The constraints of a rule say which files to match, e.g., in terms of constraining the actual filename. Metadata consists of key-value pairs. In the [101project](http://101companies.org/wiki/@project), metadata is concerned with usage of [languages](http://101companies.org/wiki/Software_language) and [technologies](http://101companies.org/wiki/@technology), with claims about the implementation of features, with tagging for terms of the [101companies:Vocabulary](https://github.com/101companies/101dev) and general concepts, as available on the [101wiki](http://101companies.org/wiki/@project). Conceptually, the language is not tied to the [101project](http://101companies.org/wiki/@project). The metadata is directly used for the exploration of the [101repo](https://github.com/101companies/101repo), as supposed by the [101companies:Explorer](http://101companies.org/resources?format=html&wikititle=@project). The official syntax of [Language:101meta](#Language:101meta) is [JSON-based](http://json.org/) with arbitrary JSON expressions for metadata values. The [Language:101meta](#Language:101meta) is primarily meant to facilitate the representation of rules in a form that is directly useful for automated processing; usability of the notation for the end user is also a concern, but a secondary one in the view of extra tool support helping with the use of the mechanism. For instance, the [101companies:Explorer](http://101companies.org/resources?format=html&wikititle=@project) provides support for authoring rules in an interactive manner so that the notation does not need to be manipulated directly.
+[Language:101meta](#language:101meta) is a rule-based language for connecting metadata with files and fragments
+thereof. The constraints of a rule say which files to match, e.g., in terms of constraining the actual 
+filename. Metadata consists of key-value pairs. In the [101project](http://101companies.org/wiki/@project), metadata
+is concerned with usage of [languages](http://101companies.org/wiki/Software_language) and 
+[technologies](http://101companies.org/wiki/@technology), with claims about the implementation of features, with 
+tagging for terms of the [101companies:Vocabulary](https://github.com/101companies/101dev) and general concepts, as 
+available on the [101wiki](http://101companies.org/wiki/@project). Conceptually, the language is not tied to the 
+[101project](http://101companies.org/wiki/@project). The metadata is directly used for the exploration of the 
+[101repo](https://github.com/101companies/101repo), as supposed by the 
+[101companies:Explorer](http://101companies.org/resources?format=html&wikititle=@project). The official syntax of 
+[Language:101meta](#Language:101meta) is [JSON-based](http://json.org/) with arbitrary JSON expressions for metadata
+values. The [Language:101meta](#Language:101meta) is primarily meant to facilitate the representation of rules in a 
+form that is directly useful for automated processing; usability of the notation for the end user is also a concern,
+but a secondary one in the view of extra tool support helping with the use of the mechanism. For instance, the 
+[101companies:Explorer](http://101companies.org/resources?format=html&wikititle=@project) provides support for 
+authoring rules in an interactive manner so that the notation does not need to be manipulated directly.
 
 ## Constraints
 
-There are two kinds of constrains in the current design of the [101meta language](#Language:101meta). One constraint could be an aggregated metadata value. This constraint can just be used though, when it is safe to say that at the time the rules will be executed the complete metadata values are already known. Therefore the modules have to let the [101worker](https://github.com/101companies/101worker) know, through the metadata description, what metadatas they have a constraint to or are retrieving during the execution. That can be compared to a pre and post condition see more next paragraph.
-Besides those constraints there are also the follow specific ones. These kinds of constraints can be used whenever you want to. Hence they are independent from the execution time:
+There are two kinds of constrains in the current design of the [101meta language](#Language:101meta). One constraint
+could be an aggregated metadata value. This constraint can just be used though, when it is safe to say that at the
+time the rules will be executed the complete metadata values are already known. Therefore the modules have to let
+the [101worker](https://github.com/101companies/101worker) know, through the metadata description, what metadatas
+they have a constraint to or are retrieving during the execution. That can be compared to a pre and post condition
+see more next paragraph.
+Besides those constraints there are also the follow specific ones. These kinds of constraints can be used whenever
+you want to. Hence they are independent from the execution time:
 
 * **filename:** the name of a file to be matched. The name can also be specified by a pattern.
-* **basename:** the basename of a file to be matched. The name can also be specified by a pattern. As usual, a basename is a filename without any directory part.
-* **suffix:** the suffix of a file to be matched. This is essentially a shorthand for a pattern to constrain only the suffix (typically, the extension) of a filename.
+* **basename:** the basename of a file to be matched. The name can also be specified by a pattern. As usual, a
+basename is a filename without any directory part.
+* **suffix:** the suffix of a file to be matched. This is essentially a shorthand for a pattern to constrain only
+the suffix (typically, the extension) of a filename.
 * **dirname:** the name of the directory of a file to be matched. The name can also be specified by a pattern. The file must be contained in the specified directory or a subdirectory thereof.
 * **content:** the content of a file to be matched based on regular expression to be applied to the text of the file.
 * **fragment:** a fragment of a matched file to which to apply to metadata, subject to a suitable fragment description.
