@@ -434,7 +434,7 @@ Every predicate has a predicate description that informs the [predicates101meta]
 ```
 {
 	"name" : "NamePredicate", 	
-	"args" : [Minimum number of arguments, maximum number of arguments], 
+	"args" : [minimum number of arguments, maximum number of arguments], 
 	"dependencies" : ["extract101meta"], 
 	"metadata" : [] 	
  }
