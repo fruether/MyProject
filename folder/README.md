@@ -3,18 +3,18 @@ A language for associating metadata with files in a file system.
 
 
 ## Summary
-[Language:101meta](#language:101meta) is a rule-based language for associating metadata with files and fragments thereof. The constraints of a rule say what files to match, e.g., in terms of constraining the actual filename. Metadata consists of key-value pairs. In the [101project](http://101companies.org/wiki/@project), metadata is concerned with usage of [languages](http://101companies.org/wiki/Software_language) and [technologies](http://101companies.org/wiki/@technology), with claims about the implementation of features, with tagging for terms of the [101companies:Vocabulary]() and general concepts, as available on the [101wiki](http://101companies.org/wiki/@project). Conceptually, the language is not tied to the [101project](http://101companies.org/wiki/@project). The metadata is directly used for exploration of the [101repo](https://github.com/101companies/101repo), as supposed by the [101companies:Explorer](http://101companies.org/resources?format=html&wikititle=@project). The official syntax of [Language:101meta](#Language:101meta) is [JSON-based](http://json.org/) with arbitrary JSON expressions for metadata values. The [Language:101meta](#Language:101meta) is primarily meant to facilitate the representation of rules in a form that is directly useful for automated processing; usability of the notation for the end user is also concern, but a secondary one in the view of extra tool support helping with the use of the mechanism. For instance, the [101companies:Explorer](http://101companies.org/resources?format=html&wikititle=@project) provides support for authoring rules in an interactive manner so that the notation does not need to be manipulated directly.
+[Language:101meta](#language:101meta) is a rule-based language for connecting metadata with files and fragments thereof. The constraints of a rule say which files to match, e.g., in terms of constraining the actual filename. Metadata consists of key-value pairs. In the [101project](http://101companies.org/wiki/@project), metadata is concerned with usage of [languages](http://101companies.org/wiki/Software_language) and [technologies](http://101companies.org/wiki/@technology), with claims about the implementation of features, with tagging for terms of the [101companies:Vocabulary](https://github.com/101companies/101dev) and general concepts, as available on the [101wiki](http://101companies.org/wiki/@project). Conceptually, the language is not tied to the [101project](http://101companies.org/wiki/@project). The metadata is directly used for the exploration of the [101repo](https://github.com/101companies/101repo), as supposed by the [101companies:Explorer](http://101companies.org/resources?format=html&wikititle=@project). The official syntax of [Language:101meta](#Language:101meta) is [JSON-based](http://json.org/) with arbitrary JSON expressions for metadata values. The [Language:101meta](#Language:101meta) is primarily meant to facilitate the representation of rules in a form that is directly useful for automated processing; usability of the notation for the end user is also a concern, but a secondary one in the view of extra tool support helping with the use of the mechanism. For instance, the [101companies:Explorer](http://101companies.org/resources?format=html&wikititle=@project) provides support for authoring rules in an interactive manner so that the notation does not need to be manipulated directly.
 
 ## Constraints
 
-There are two kinds of constrains in the current design of the [101meta language](#Language:101meta). One constrain could be an aggregated metadata value. This constraint can just be used though, when it is safe to say that at the time the rules will be executed the complete metadata values are known already. Therefore the modules have to let the [101worker](https://github.com/101companies/101worker) know, through the metadata description, what metadata’s they have a constrain to or are retrieving during the execution. That can be compared to a pre and post condition [see more next paragraph]().
-Besides that constraints there are also the follow specific once. This kind of constraints can be used whenever you want to. Hence they are independent from the execution time:
+There are two kinds of constrains in the current design of the [101meta language](#Language:101meta). One constraint could be an aggregated metadata value. This constraint can just be used though, when it is safe to say that at the time the rules will be executed the complete metadata values are already known. Therefore the modules have to let the [101worker](https://github.com/101companies/101worker) know, through the metadata description, what metadatas they have a constraint to or are retrieving during the execution. That can be compared to a pre and post condition see more next paragraph.
+Besides those constraints there are also the follow specific ones. These kinds of constraints can be used whenever you want to. Hence they are independent from the execution time:
 
 * **filename:** the name of a file to be matched. The name can also be specified by a pattern.
 * **basename:** the basename of a file to be matched. The name can also be specified by a pattern. As usual, a basename is a filename without any directory part.
 * **suffix:** the suffix of a file to be matched. This is essentially a shorthand for a pattern to constrain only the suffix (typically, the extension) of a filename.
 * **dirname:** the name of the directory of a file to be matched. The name can also be specified by a pattern. The file must be contained in the specified directory or a subdirectory thereof.
-* **content:** the content of a file to matched based on regular expression to be applied to the text of the file.
+* **content:** the content of a file to be matched based on regular expression to be applied to the text of the file.
 * **fragment:** a fragment of a matched file to which to apply to metadata, subject to a suitable fragment description.
 * **predicate:** the name of an executable to be applied to files for deciding on matching.
 
@@ -39,11 +39,11 @@ Besides that constraints there are also the follow specific once. This kind of c
 
 ## How the 101worker and Language:101meta come together
 
-In that short chapter we want to discuss how the [101worker](https://github.com/101companies/101worker) and the [Language:101meta](#Language:101meta) fit together in the complete system. The modules with the `101` ending are somewhat related to the [Language:101meta](#Language:101meta). It is important to understand how they act together to get a overall understanding.
+In that short chapter we want to discuss how the [101worker](https://github.com/101companies/101worker) and the [Language:101meta](#Language:101meta) fit together in the complete system. The modules with the `101` ending are somewhat related to the [Language:101meta](#Language:101meta). It is important to understand how they act together to gain an overall understanding.
 
-First of all all the 'rules', which are stored in the [101repo](https://github.com/101companies/101repo), are aggregated and summarized in one large file called [rules.json](http://data.101companies.org/dumps/rules.json). This job is performed by the [rules101meta](https://github.com/101companies/101worker/tree/master/modules/rules101meta) module.
+First of all, all the 'rules', which are stored in the [101repo](https://github.com/101companies/101repo), are aggregated and summarized in one large file called [rules.json](http://data.101companies.org/dumps/rules.json). This job is performed by the [rules101meta](https://github.com/101companies/101worker/tree/master/modules/rules101meta) module.
 After that module ran successfully the first basic rules are executed by the [matches101meta](https://github.com/101companies/101worker/tree/master/modules/matches101meta) module. This module aims to execute all the rules, that neither have a predicate nor a fragment as part of the constraint. The result is stored in files with the ending `*.matches.json` in [101web/resources location](http://data.101companies.org/resources/).
-Once that is done we start to execute different modules to analyze the files. The way of the execution, depends on the metadata that are delivered about the file. The [metrics101meta](https://github.com/101companies/101worker/wiki/Module%20metrics101meta) module uses the GeSHi coded retrieved ?before? to extract token sequences.
+Once that is done we start to execute different modules to analyze the files. The way of the execution, depends on the metadata that are delivered about the file. The [metrics101meta](https://github.com/101companies/101worker/wiki/Module%20metrics101meta) module uses the GeSHi coded retrieved before to extract token sequences.
 
 Another part in processing the [Language:101meta](#Language:101meta) is that we want to validate the found metadata especially the language. Therefore the rules identify by the suffix of a file not just a language but also a specific [validator](https://github.com/101companies/101worker/tree/master/validators). These [validators](https://github.com/101companies/101worker/tree/master/validators) are used to make sure that the assumed language is right. The specific [validators](https://github.com/101companies/101worker/tree/master/validators), are references over the validator metadata key and are finally executed in the [validate101meta](https://github.com/101companies/101worker/tree/master/modules/validate101meta) module.
 
@@ -54,13 +54,13 @@ Another part in processing the [Language:101meta](#Language:101meta) is that we 
 }
 ```
 
-The next thing that is going to happen is a fact extraction on the files. This will take place in the [extract101meta](https://github.com/101companies/101worker/tree/master/modules/extract101meta) module. There are several kind of [extractors](https://github.com/101companies/101worker/tree/master/extractor) that are plugged into the [101worker](https://github.com/101companies/101worker/) and are referenced over the [language keyword](* **language**) inside the metadata values. The [extract101meta](https://github.com/101companies/101worker/tree/master/modules/extract101meta) module will now simply observe the language of an artefact, by using the result of [matches101meta](https://github.com/101companies/101worker/tree/master/modules/matches101meta) module, and execute the right [extractor](https://github.com/101companies/101worker/tree/master/extractor) module.
+Next we describe what is going to happen is a fact extraction on the files. This will take place in the [extract101meta](https://github.com/101companies/101worker/tree/master/modules/extract101meta) module. There are several kinds of [extractors](https://github.com/101companies/101worker/tree/master/extractor) that are plugged into the [101worker](https://github.com/101companies/101worker/) and are referenced over the [language keyword](* **language**) inside the metadata values. The [extract101meta](https://github.com/101companies/101worker/tree/master/modules/extract101meta) module will now simply observe the language of an artefact, by using the result of [matches101meta](https://github.com/101companies/101worker/tree/master/modules/matches101meta) module, and execute the right [extractor](https://github.com/101companies/101worker/tree/master/extractor) module.
 
 
 Afterwards [fragmentMetrics101meta](https://github.com/101companies/101worker/tree/master/modules/fragmentMetrics101meta) module will do further processing of on the files using the previous result.
 
 
-After the first analyses steps on the metadata is performed the [101worker](https://github.com/101companies/101worker) will now continue to run the remaining rules. First the predicate rules will be executed. Rules of that type reference to a predicate that will be executed. Some predicates use the result of the previous fact extraction hence that module has a dependency to [extract101meta](https://github.com/101companies/101worker/tree/master/modules/extract101meta). Further this rules aren’t run on every file but just the once that have the requested language. An example of the discussed rule type is: 
+After the first analysis on the metadata the [101worker](https://github.com/101companies/101worker) will now continue to run the remaining rules. First the predicate rules will be executed. Rules of that type refer to a predicate that will be executed. Some predicates use the result of the previous fact extraction hence that module has a dependency to [extract101meta](https://github.com/101companies/101worker/tree/master/modules/extract101meta). Further this rules are not run on every file but just the once that have the requested language. An example of the discussed rule type is: 
 
 ```
 {
@@ -99,8 +99,8 @@ Constraint example:
 }
 ```
 
-In that example there is a constraint of a the `language` metadata-key. It is used to make sure that the rule is just applied on files that have the specific language. That is especially useful here because the technology JAXB is just used in a Java context and therefore there is no need to execute the predicate for all kind of files.
-Right now you cannot refer to every metadata-key. So if you plan to use it at another form than above make sure that in the [meta101_/library](https://github.com/101companies/101worker/tree/master/libraries/101meta) already supports it. If not perhaps add it yourself.  
+In that example there is a constraint of the `language` metadata-key. It is used to make sure that the rule is just applied on files that have the specific language. That is especially useful here because the technology JAXB is just used in a Java context and therefore there is no need to execute the predicate for all kinds of files.
+Right now you cannot refer to every metadata-key. So if you plan to use it in another form than the one shown above, make sure that the [meta101_/library](https://github.com/101companies/101worker/tree/master/libraries/101meta) already supports it. If not you could add it yourself.  
 
 
 ### Language-related metadata 
@@ -179,7 +179,7 @@ We may also use regular expression matching on file names. In this manner, we ca
 
 Here, `^` marks the beginning of the string, `$` marks the end of the string, and `\` escapes a metasymbol (because `.` is metasymbol for any character). The regular expression is enclosed by `#...#` thereby expressing unambiguously that regular expression matching as opposed to literal name matching is to be applied.
 
-The `.jar` file for ANTLR is by no means the only way how files could be associated with `ANTLR`. In general, `technologies` deal with various kinds of files: 
+The `.jar` file for ANTLR is by no means the only way how files can be associated with `ANTLR`. In general, `technologies` deal with various kinds of files: 
 
 * input 
 * output 
@@ -367,7 +367,7 @@ In this manner, files may be processed by fact extractors and thereby enable fur
 
 ### Inside Module Description:
 
-The different modules depend on certain metadata. For example uses the [extract101meta](https://github.com/101companies/101worker/tree/master/modules/extract101meta) module the retrieved language’s to determine which [extractor](https://github.com/101companies/101worker/tree/master/extractor) it should execute. This is the case since every language has a specific [extractor](##extractor). 
+The different modules depend on certain metadata. For example uses the [extract101meta](https://github.com/101companies/101worker/tree/master/modules/extract101meta) module the retrieved languages to determine which [extractor](https://github.com/101companies/101worker/tree/master/extractor) it should execute. This is the case since every language has a specific [extractor](##extractor). 
 That is the reason why every module that is involved with the processing of metadata has to insert specific values into the module description. First of all it has to tell the [runner](https://github.com/101companies/101worker/tree/master/tools/runner) which metadata the module depends on and which one is obtained (e.g matches receives: language). The reason we know that is the simple fact that there are specific patterns due to the architecture of rules. So it is safe to say that the suffix declares the language.
 
 The [predicates101meta](https://github.com/101companies/101worker/blob/master/modules/predicates101meta/) module, is an example of a how the [Language:101meta](#Language:101meta) is embedded in the modul description:
@@ -406,7 +406,7 @@ source: https://github.com/101companies/101worker/blob/master/modules/predicates
 
 ### Inside Predicates
 
-Every predicate has a predicate description that informs the [predicates101meta](https://github.com/101companies/101worker/tree/master/modules/predicates101meta) module about the module name, the metadata as well as modul dependencies and the minmum and maximum arguments. Although it can depend on metadata there is right now no way to tell what metadata the predicates obtains. We decided against giving that option, because right now there is no use case where that option would be of any use.
+Every predicate has a predicate description that informs the [predicates101meta](https://github.com/101companies/101worker/tree/master/modules/predicates101meta) module about the module name, the metadata as well as modul dependencies and the minimum and maximum arguments. Although it can depend on metadata there is right now no way to tell what metadata the predicates obtains. We decided against giving that option, because right now there is no use case where that option would be of any use.
 
 ```
 {
