@@ -122,8 +122,8 @@ Constraint example:
 }
 ```
 
-In that example there is a constraint of the `language` metadata-key. It is used to make sure that the rule is just applied on files that have the specific language. That is especially useful here because the technology JAXB is just used in a Java context and therefore there is no need to execute the predicate for all kinds of files.
-Right now you cannot refer to every metadata-key. So if you plan to use it in another form than the one shown above, make sure that the [meta101_/library](https://github.com/101companies/101worker/tree/master/libraries/101meta) already supports it. If not you could add it yourself.  
+In that example there is a constraint of the `language` metadata-key. It is used to make sure that the rule is just applied on files that have the specific language. That is especially useful here because the technology [JAXB](https://jaxb.java.net/) is just used in a Java context and therefore there is no need to execute the predicate for all kinds of files.
+Right now you cannot refer to every metadata-key. So if you plan to use it in another form than the one shown above, make sure that the [meta101 library](https://github.com/101companies/101worker/tree/master/libraries/101meta) already supports it. If not you could add it yourself.  
 
 
 ### Language-related metadata 
