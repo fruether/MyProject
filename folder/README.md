@@ -52,7 +52,7 @@ the suffix (typically, the extension) of a filename.
 * **term** for association with a term of the 101companies:Vocabulary.
 * **phrase** for association with a phrase built from the 101companies:Vocabulary.
 * **concept** for association with a concept on the 101wiki.
-* **nature** for association of file nature, e.g., `binary` for use by the 101companies:Explorer.
+* **nature** for association of file nature, e.g., binary for use by the 101companies:Explorer.
 * **geshi** for association with a language code as used when rendering with Technology:GeSHi.
 * **locator** for association with an executable to be used as fragment locator.
 * **validator** for association with an executable to be used as validator.
