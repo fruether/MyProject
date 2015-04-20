@@ -126,7 +126,7 @@ In that example there is a constraint of the `language` metadata-key. It is used
 Right now you cannot refer to every metadata-key. So if you plan to use it in another form than the one shown above, make sure that the [meta101 library](https://github.com/101companies/101worker/tree/master/libraries/101meta) already supports it. If not you could add it yourself.  
 
 
-### Language-related metadata 
+### Language-related metadata ###(This paragraph is from the http://101companies.org/wiki/Language:101meta)
 
 The first example concerns matching of files with suffix `.java` to be associated with the language `Java`.
 
@@ -154,7 +154,7 @@ The example specifies a single rule. In general, an [Language:101meta](#Language
 ]
 ```
 
-### Technology-related metadata
+### Technology-related metadata ### (This paragraph is from the http://101companies.org/wiki/Language:101meta)
 
 We will be concerned now with technologies as opposed to languages. We define rules related to the parser generator [Technology:ANTLR](http://www.antlr.org/) for illustration. In the case of using `ANTLR` with Java, the technology is packaged as a `.jar` archive. Hence, let us associate, for example, the (version-specific) file `antlr-3.2.jar` with the technology `ANTLR`.
 
@@ -234,7 +234,7 @@ This time, the metadata declares that the given file is input for the parser gen
 There is a major problem with the rule for generated files: the rule relies on insufficiently distinctive filename patterns. The use of `Parser` or `Lexer` in naming source files for parsers and lexers does not reasonably imply usage of `ANTLR`. Thus, we need to further constrain the rule in a way that the content of the files can be checked to support the assumption about `ANTLR` usage. We will return to this problem later in the context of a more complete discussion of metadata mechanics TODO.
 
 
-### Feature-related metadata:
+### Feature-related metadata ### (This paragraph is from the http://101companies.org/wiki/Language:101meta):
 
 We may want to `tag` files with features of the `101system`, as they are implemented in the file. The following example deals with `Contribution:javaStatic`, which is a simple and modular Java-based implementation of the 101system:
 ```
@@ -262,7 +262,7 @@ We may want to `tag` files with features of the `101system`, as they are impleme
 ]
 ```
 
-### Domain-related metadata
+### Domain-related metadata ### (This paragraph is from the http://101companies.org/wiki/Language:101meta)
 
 We may also want to `tag` files with terms of the `101companies:Vocabulary` which collects nouns and verbs of the `101companies domain`. This may be, in fact, an alternative to tagging files with features. For instance, we may want to express that certain modules define the 101companies-specific operations `101term:Cut` and `101term:Total`. Again, we apply tagging to `Contribution:javaStatic`.
 
@@ -321,7 +321,7 @@ Terms can also be composed to provide more accurate descriptions. For instance, 
 
 Such phrases are even more useful when attached to specific file fragments as opposed to entire files. We will return to this opportunity later in the context of a more complete discussion of metadata mechanics.
 
-### Concept-related metadata
+### Concept-related metadata ###(This paragraph is from the http://101companies.org/wiki/Language:101meta)
 
 Further, we may also want to `tag` files with any concepts in the broader areas of software technologies and software languages. Ideally, such concepts should be readily modeled on the 101wiki. For instance, we may want to express that certain modules define a parser, a GUI, or use a MVC architecture.
 
